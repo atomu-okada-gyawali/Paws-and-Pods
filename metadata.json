@@ -1,0 +1,6 @@
+{
+  "name": "Paws & Pods",
+  "description": "Secure, sustainable pet e-commerce platform's PostgreSQL database schema.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
