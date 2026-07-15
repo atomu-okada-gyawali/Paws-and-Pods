@@ -18,16 +18,14 @@ async function startServer() {
   const app = express();
   const PORT = Number(process.env.PORT) || 3000;
 
-  // Trust the first proxy hop so express-rate-limit sees the real client IP.
+  // trust first proxy so we get the real client ip
   app.set("trust proxy", 1);
 
   app.use(helmet());
   app.use(express.json({ limit: "10kb" }));
   app.use(cookieParser());
 
-  // Serve uploaded images before the API rate limiter so image loads on a page
-  // don't consume a client's request budget. Files have random names and the
-  // directory has no index, so there's no listing or path-traversal exposure.
+  // serve images before the limiter so they don't eat the rate budget
   app.use(
     "/api/uploads",
     express.static(UPLOADS_DIR, {

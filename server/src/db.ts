@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/paws-and-pods";
 
-// Guard against multiple connections in development due to HMR / reloads
+// avoid reconnecting on every hot reload
 const globalForMongoose = global as unknown as { mongoose: typeof mongoose };
 
 export const db = globalForMongoose.mongoose || mongoose;
