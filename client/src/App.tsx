@@ -8,6 +8,7 @@ import { AuthModal } from "./components/AuthModal";
 import { CartDrawer } from "./components/CartDrawer";
 import { useApp } from "./context/AppContext";
 import { LayoutDashboard, Leaf, LogOut, ShoppingCart, User } from "lucide-react";
+import { Button, IconButton } from "./components/ui";
 
 export default function App() {
   const { user, logout, isAuthOpen, openAuth, closeAuth, setAuth, announce, ariaLiveAnnouncement, cart, openCart } = useApp();
@@ -52,27 +53,25 @@ export default function App() {
                     <LayoutDashboard className="w-4 h-4" />
                   </Link>
                 )}
-                <button
-                  onClick={logout}
-                  className="p-2 text-neutral-500 hover:text-rose-600 hover:bg-white rounded-lg border border-transparent hover:border-neutral-200 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  aria-label="Sign out"
-                >
+                <IconButton label="Sign out" variant="danger" onClick={logout} className="p-2">
                   <LogOut className="w-4 h-4" />
-                </button>
+                </IconButton>
               </div>
             ) : (
-              <button
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={openAuth}
-                className="px-4.5 py-2 hover:bg-neutral-950 hover:text-white rounded-xl text-xs font-bold text-neutral-900 border border-neutral-250 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="text-neutral-900 hover:bg-neutral-950 hover:text-white"
               >
                 Sign In
-              </button>
+              </Button>
             )}
 
-            <button
+            <IconButton
+              label={`Open cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`}
               onClick={openCart}
-              className="relative p-2.5 text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              aria-label={`Open cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`}
+              className="relative p-2.5 rounded-xl text-neutral-700"
             >
               <ShoppingCart className="w-5 h-5" />
               {cartCount > 0 && (
@@ -80,7 +79,7 @@ export default function App() {
                   {cartCount}
                 </span>
               )}
-            </button>
+            </IconButton>
           </div>
         </div>
       </header>
