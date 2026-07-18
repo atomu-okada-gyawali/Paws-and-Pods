@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import { ActivityEntry } from "../../types";
 import { fetchActivity } from "../../lib/authApi";
 import { useApp } from "../../context/AppContext";
-import { Loader2, ScrollText } from "lucide-react";
+import { Card, Alert, Spinner } from "../ui";
+import { ScrollText } from "lucide-react";
 
 const LABELS: Record<string, string> = {
   USER_REGISTERED: "Account created",
@@ -41,7 +42,7 @@ export function ActivityLog() {
   }, [accessToken]);
 
   return (
-    <div className="bg-white rounded-2xl border border-neutral-100 p-6 shadow-sm">
+    <Card>
       <div className="flex items-center gap-2 mb-4">
         <ScrollText className="w-5 h-5 text-emerald-600" />
         <h2 className="text-base font-bold text-neutral-900">Recent Activity</h2>
@@ -49,13 +50,11 @@ export function ActivityLog() {
 
       {loading ? (
         <div className="flex items-center gap-2 text-neutral-400 py-4" role="status">
-          <Loader2 className="w-5 h-5 animate-spin" />
+          <Spinner className="w-5 h-5" />
           <span className="text-sm">Loading…</span>
         </div>
       ) : error ? (
-        <div role="alert" className="p-3 bg-rose-50 text-xs font-semibold text-rose-700 rounded-xl border border-rose-100">
-          {error}
-        </div>
+        <Alert variant="error">{error}</Alert>
       ) : entries.length === 0 ? (
         <p className="text-sm text-neutral-500">No recorded activity yet.</p>
       ) : (
@@ -73,6 +72,6 @@ export function ActivityLog() {
           ))}
         </ul>
       )}
-    </div>
+    </Card>
   );
 }
