@@ -6,12 +6,13 @@
 import { useRef, useState } from "react";
 import { uploadImage } from "../lib/authApi";
 import { useApp } from "../context/AppContext";
-import { ImagePlus, Loader2, X } from "lucide-react";
+import { ImagePlus, X } from "lucide-react";
+import { Button, Spinner } from "./ui";
 
 interface ImageUploaderProps {
   value?: string;
   onChange: (url: string) => void;
-  /** "square" for avatars, "wide" for product images. */
+  // square = avatar, wide = product
   shape?: "square" | "wide";
 }
 
@@ -29,7 +30,7 @@ export function ImageUploader({ value, onChange, shape = "wide" }: ImageUploader
 
     setError(null);
 
-    // Client-side guard for quick feedback; the server re-validates everything.
+    // quick check, server revalidates
     if (file.size > MAX_BYTES) {
       setError("Image must be 2 MB or smaller.");
       return;
@@ -61,30 +62,33 @@ export function ImageUploader({ value, onChange, shape = "wide" }: ImageUploader
           )}
           {uploading && (
             <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-              <Loader2 className="w-5 h-5 animate-spin text-neutral-500" />
+              <Spinner className="w-5 h-5 text-neutral-500" />
             </div>
           )}
         </div>
 
         <div className="space-y-2">
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="sm"
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
-            className="px-3 py-1.5 border border-neutral-200 hover:bg-neutral-50 disabled:opacity-50 rounded-lg text-xs font-semibold text-neutral-700 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center gap-1.5"
           >
             <ImagePlus className="w-3.5 h-3.5" />
             {value ? "Replace image" : "Upload image"}
-          </button>
+          </Button>
           {value && (
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="sm"
               onClick={() => onChange("")}
-              className="px-3 py-1.5 text-xs font-semibold text-neutral-500 hover:text-rose-600 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-rose-500 flex items-center gap-1.5"
+              className="hover:text-rose-600"
             >
               <X className="w-3.5 h-3.5" />
               Remove
-            </button>
+            </Button>
           )}
           <p className="text-[10px] text-neutral-400">JPEG, PNG, GIF or WEBP · up to 2 MB</p>
         </div>
