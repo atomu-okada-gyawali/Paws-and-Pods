@@ -1,7 +1,4 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+
 
 import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { useApp } from "../../context/AppContext";

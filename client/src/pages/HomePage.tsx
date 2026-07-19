@@ -9,7 +9,7 @@ import { fetchProducts } from "../lib/api";
 import { ProductCard } from "../components/ProductCard";
 import { FilterSidebar } from "../components/FilterSidebar";
 import { useApp } from "../context/AppContext";
-import { Loader2 } from "lucide-react";
+import { Alert, Spinner, Select } from "../components/ui";
 
 const SORT_LABELS: Record<SortOption, string> = {
   newest: "Newest",
@@ -55,7 +55,7 @@ export function HomePage() {
       <div className="lg:col-span-9 space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-black font-sans text-neutral-950 tracking-tight">Shop All Products</h1>
+            <h1 className="text-2xl font-bold font-display text-neutral-950 tracking-tight">Shop All Products</h1>
             {!loading && !error && (
               <p className="text-xs text-neutral-500 mt-1">
                 {products.length} product{products.length === 1 ? "" : "s"}
@@ -63,10 +63,11 @@ export function HomePage() {
             )}
           </div>
 
-          <select
+          <Select
+            size="sm"
             value={filters.sort || "newest"}
             onChange={(e) => setFilters({ ...filters, sort: e.target.value as SortOption })}
-            className="px-3 py-2 bg-white border border-neutral-200 rounded-xl text-xs font-semibold text-neutral-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="py-2 bg-white border-neutral-200 text-neutral-700"
             aria-label="Sort products"
           >
             {Object.entries(SORT_LABELS).map(([value, label]) => (
@@ -74,21 +75,17 @@ export function HomePage() {
                 {label}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
 
         {loading && (
           <div className="flex items-center justify-center py-16 text-neutral-400" role="status">
-            <Loader2 className="w-6 h-6 animate-spin mr-2" />
+            <Spinner className="w-6 h-6 mr-2" />
             <span className="text-sm">Loading products…</span>
           </div>
         )}
 
-        {error && !loading && (
-          <div role="alert" className="p-4 bg-rose-50 text-sm font-medium text-rose-700 rounded-xl border border-rose-100">
-            {error}
-          </div>
-        )}
+        {error && !loading && <Alert variant="error">{error}</Alert>}
 
         {!loading && !error && products.length === 0 && (
           <div className="p-6 text-center text-sm text-neutral-500 bg-white rounded-2xl border border-neutral-100">
