@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useEffect, useState } from "react";
 import { Product, ProductFilters, SortOption } from "../types";
 import { fetchProducts } from "../lib/api";
@@ -35,7 +30,8 @@ export function HomePage() {
         if (!cancelled) setProducts(data);
       })
       .catch((err) => {
-        if (!cancelled) setError(err.message || "Failed to load product catalog.");
+        if (!cancelled)
+          setError(err.message || "Failed to load product catalog.");
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -55,7 +51,9 @@ export function HomePage() {
       <div className="lg:col-span-9 space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold font-display text-neutral-950 tracking-tight">Shop All Products</h1>
+            <h1 className="text-2xl font-bold font-display text-neutral-950 tracking-tight">
+              Shop All Products
+            </h1>
             {!loading && !error && (
               <p className="text-xs text-neutral-500 mt-1">
                 {products.length} product{products.length === 1 ? "" : "s"}
@@ -66,7 +64,9 @@ export function HomePage() {
           <Select
             size="sm"
             value={filters.sort || "newest"}
-            onChange={(e) => setFilters({ ...filters, sort: e.target.value as SortOption })}
+            onChange={(e) =>
+              setFilters({ ...filters, sort: e.target.value as SortOption })
+            }
             className="py-2 bg-white border-neutral-200 text-neutral-700"
             aria-label="Sort products"
           >
@@ -79,7 +79,10 @@ export function HomePage() {
         </div>
 
         {loading && (
-          <div className="flex items-center justify-center py-16 text-neutral-400" role="status">
+          <div
+            className="flex items-center justify-center py-16 text-neutral-400"
+            role="status"
+          >
             <Spinner className="w-6 h-6 mr-2" />
             <span className="text-sm">Loading products…</span>
           </div>
@@ -96,7 +99,11 @@ export function HomePage() {
         {!loading && !error && products.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={addToCart}
+              />
             ))}
           </div>
         )}
