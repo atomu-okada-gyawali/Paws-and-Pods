@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { FormEvent, useState } from "react";
 import { changePassword } from "../../lib/authApi";
 import { meetsPasswordPolicy } from "../../lib/passwordPolicy";
@@ -47,11 +42,21 @@ export function ChangePasswordForm() {
     <Card>
       <div className="flex items-center gap-2 mb-4">
         <KeyRound className="w-5 h-5 text-emerald-600" />
-        <h2 className="text-base font-bold text-neutral-900">Change Password</h2>
+        <h2 className="text-base font-bold text-neutral-900">
+          Change Password
+        </h2>
       </div>
 
-      {notice && <Alert variant="success" className="mb-4">{notice}</Alert>}
-      {error && <Alert variant="error" className="mb-4">{error}</Alert>}
+      {notice && (
+        <Alert variant="success" className="mb-4">
+          {notice}
+        </Alert>
+      )}
+      {error && (
+        <Alert variant="error" className="mb-4">
+          {error}
+        </Alert>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-3 max-w-sm">
         <Input
