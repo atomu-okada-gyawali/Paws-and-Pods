@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useRef, useState } from "react";
 import { exportData, importData } from "../../lib/authApi";
 import { useApp } from "../../context/AppContext";
@@ -23,7 +18,9 @@ export function DataControls() {
     setBusy(true);
     try {
       const data = await exportData(accessToken);
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json",
+      });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -63,22 +60,41 @@ export function DataControls() {
     <Card>
       <h2 className="text-base font-bold text-neutral-900 mb-1">Your Data</h2>
       <p className="text-xs text-neutral-500 mb-4">
-        Export a copy of your account data, or import your profile from a previous export.
+        Export a copy of your account data, or import your profile from a
+        previous export.
       </p>
 
-      {notice && <Alert variant="success" className="mb-4">{notice}</Alert>}
-      {error && <Alert variant="error" className="mb-4">{error}</Alert>}
+      {notice && (
+        <Alert variant="success" className="mb-4">
+          {notice}
+        </Alert>
+      )}
+      {error && (
+        <Alert variant="error" className="mb-4">
+          {error}
+        </Alert>
+      )}
 
       <div className="flex flex-wrap gap-3">
         <Button variant="outline" onClick={handleExport} disabled={busy}>
           {busy ? <Spinner /> : <Download className="w-4 h-4" />}
           Export data
         </Button>
-        <Button variant="outline" onClick={() => fileInput.current?.click()} disabled={busy}>
+        <Button
+          variant="outline"
+          onClick={() => fileInput.current?.click()}
+          disabled={busy}
+        >
           <Upload className="w-4 h-4" />
           Import profile
         </Button>
-        <input ref={fileInput} type="file" accept="application/json" onChange={handleImport} className="hidden" />
+        <input
+          ref={fileInput}
+          type="file"
+          accept="application/json"
+          onChange={handleImport}
+          className="hidden"
+        />
       </div>
     </Card>
   );

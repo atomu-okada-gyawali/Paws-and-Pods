@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState } from "react";
 import { Lock, Mail, UserCheck } from "lucide-react";
 import { UserState } from "../types.js";
@@ -17,7 +12,12 @@ interface AuthModalProps {
   onAnnounce: (text: string) => void;
 }
 
-export function AuthModal({ isOpen, onClose, onSuccess, onAnnounce }: AuthModalProps) {
+export function AuthModal({
+  isOpen,
+  onClose,
+  onSuccess,
+  onAnnounce,
+}: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -60,8 +60,13 @@ export function AuthModal({ isOpen, onClose, onSuccess, onAnnounce }: AuthModalP
       const data = await response.json();
 
       if (!response.ok) {
-        const detail = Array.isArray(data.details) && data.details.length > 0 ? data.details[0] : null;
-        throw new Error(detail || data.error || "Authentication operation failed.");
+        const detail =
+          Array.isArray(data.details) && data.details.length > 0
+            ? data.details[0]
+            : null;
+        throw new Error(
+          detail || data.error || "Authentication operation failed.",
+        );
       }
 
       // password ok, now need the totp code
@@ -96,7 +101,10 @@ export function AuthModal({ isOpen, onClose, onSuccess, onAnnounce }: AuthModalP
       <div className="p-6 sm:p-8">
         <div className="flex items-center gap-2 mb-6">
           <Lock className="w-6 h-6 text-emerald-600" />
-          <h2 id="auth-modal-title" className="text-xl font-display font-bold text-neutral-950">
+          <h2
+            id="auth-modal-title"
+            className="text-xl font-display font-bold text-neutral-950"
+          >
             {isLogin ? "Sign In" : "Create Account"}
           </h2>
         </div>
@@ -123,7 +131,9 @@ export function AuthModal({ isOpen, onClose, onSuccess, onAnnounce }: AuthModalP
                 minLength={10}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder={isLogin ? "Your password" : "At least 10 characters"}
+                placeholder={
+                  isLogin ? "Your password" : "At least 10 characters"
+                }
                 icon={<Lock className="w-4 h-4" />}
               />
             </Field>
@@ -166,7 +176,11 @@ export function AuthModal({ isOpen, onClose, onSuccess, onAnnounce }: AuthModalP
           )}
 
           <Button type="submit" fullWidth loading={loading} className="mt-2">
-            {isLogin && mfaRequired ? "Verify & Sign In" : isLogin ? "Sign In" : "Create Account"}
+            {isLogin && mfaRequired
+              ? "Verify & Sign In"
+              : isLogin
+                ? "Sign In"
+                : "Create Account"}
           </Button>
         </form>
 
@@ -181,7 +195,9 @@ export function AuthModal({ isOpen, onClose, onSuccess, onAnnounce }: AuthModalP
             }}
             className="text-neutral-650 hover:text-emerald-700 font-semibold focus:outline-none focus:underline"
           >
-            {isLogin ? "New here? Create an account" : "Already have an account? Sign in"}
+            {isLogin
+              ? "New here? Create an account"
+              : "Already have an account? Sign in"}
           </button>
         </div>
       </div>

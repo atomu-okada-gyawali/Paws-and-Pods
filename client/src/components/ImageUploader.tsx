@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useRef, useState } from "react";
 import { uploadImage } from "../lib/authApi";
 import { useApp } from "../context/AppContext";
@@ -18,7 +13,11 @@ interface ImageUploaderProps {
 
 const MAX_BYTES = 2 * 1024 * 1024;
 
-export function ImageUploader({ value, onChange, shape = "wide" }: ImageUploaderProps) {
+export function ImageUploader({
+  value,
+  onChange,
+  shape = "wide",
+}: ImageUploaderProps) {
   const { accessToken } = useApp();
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -49,14 +48,23 @@ export function ImageUploader({ value, onChange, shape = "wide" }: ImageUploader
   }
 
   const previewClasses =
-    shape === "square" ? "w-24 h-24 rounded-full" : "w-full aspect-video rounded-xl";
+    shape === "square"
+      ? "w-24 h-24 rounded-full"
+      : "w-full aspect-video rounded-xl";
 
   return (
     <div>
       <div className="flex items-center gap-4">
-        <div className={`relative ${previewClasses} bg-neutral-100 border border-neutral-200 overflow-hidden flex items-center justify-center shrink-0`}>
+        <div
+          className={`relative ${previewClasses} bg-neutral-100 border border-neutral-200 overflow-hidden flex items-center justify-center shrink-0`}
+        >
           {value ? (
-            <img src={value} alt="" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+            <img
+              src={value}
+              alt=""
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover"
+            />
           ) : (
             <ImagePlus className="w-6 h-6 text-neutral-300" />
           )}
@@ -90,7 +98,9 @@ export function ImageUploader({ value, onChange, shape = "wide" }: ImageUploader
               Remove
             </Button>
           )}
-          <p className="text-[10px] text-neutral-400">JPEG, PNG, GIF or WEBP · up to 2 MB</p>
+          <p className="text-[10px] text-neutral-400">
+            JPEG, PNG, GIF or WEBP · up to 2 MB
+          </p>
         </div>
       </div>
 

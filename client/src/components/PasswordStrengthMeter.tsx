@@ -1,7 +1,4 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+
 
 import { passwordRequirements, scorePasswordStrength } from "../lib/passwordPolicy";
 import { Check, X } from "lucide-react";

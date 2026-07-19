@@ -1,7 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
 
 import { ChangeEvent } from "react";
 import { PetType, ProductFilters, ProductSize } from "../types";

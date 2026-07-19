@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+@theme {
+  /* Karla for UI text, Fraunces for display headings */
+  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  /* warm paper-and-ink neutrals (includes the in-between shades the
+     markup already uses: 150/250/450/650/850) */
+  --color-neutral-50: #faf9f5;
+  --color-neutral-100: #f2efe8;
+  --color-neutral-150: #eae6db;
+  --color-neutral-200: #ded8ca;
+  --color-neutral-250: #cec6b5;
+  --color-neutral-300: #b8ae9b;
+  --color-neutral-400: #998f7b;
+  --color-neutral-450: #8a806d;
+  --color-neutral-500: #776d5c;
+  --color-neutral-600: #5f574a;
+  --color-neutral-650: #544d41;
+  --color-neutral-700: #494337;
+  --color-neutral-800: #332f27;
+  --color-neutral-850: #2b271f;
+  --color-neutral-900: #232019;
+  --color-neutral-950: #181510;
+
+  /* muted moss green replaces the stock emerald accent */
+  --color-emerald-50: #f3f6ef;
+  --color-emerald-100: #e5ecdc;
+  --color-emerald-200: #ccd9bb;
+  --color-emerald-300: #aec295;
+  --color-emerald-400: #8ba86d;
+  --color-emerald-500: #6d8c4f;
+  --color-emerald-600: #55713c;
+  --color-emerald-700: #465d33;
+  --color-emerald-750: #3d522c;
+  --color-emerald-800: #364827;
+  --color-emerald-900: #2d3b22;
+  --color-emerald-950: #171f10;
+
+  /* calmer corner radii app-wide */
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.625rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-900);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-emerald-200);
+  }
+}

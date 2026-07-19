@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 export type PetType = "Dog" | "Cat" | "Hamster";
 export type ProductSize = "Small" | "Medium" | "Large";
 export type SortOption = "price_asc" | "price_desc" | "name_asc" | "newest";
@@ -68,7 +63,12 @@ export interface ActivityEntry {
   createdAt: string;
 }
 
-export type OrderStatus = "PENDING" | "PAID" | "SHIPPED" | "DELIVERED" | "CANCELLED";
+export type OrderStatus =
+  | "PENDING"
+  | "PAID"
+  | "SHIPPED"
+  | "DELIVERED"
+  | "CANCELLED";
 
 export interface AdminOrder {
   id: string;

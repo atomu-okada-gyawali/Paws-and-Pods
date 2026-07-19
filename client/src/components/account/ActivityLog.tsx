@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useEffect, useState } from "react";
 import { ActivityEntry } from "../../types";
 import { fetchActivity } from "../../lib/authApi";
@@ -45,11 +40,16 @@ export function ActivityLog() {
     <Card>
       <div className="flex items-center gap-2 mb-4">
         <ScrollText className="w-5 h-5 text-emerald-600" />
-        <h2 className="text-base font-bold text-neutral-900">Recent Activity</h2>
+        <h2 className="text-base font-bold text-neutral-900">
+          Recent Activity
+        </h2>
       </div>
 
       {loading ? (
-        <div className="flex items-center gap-2 text-neutral-400 py-4" role="status">
+        <div
+          className="flex items-center gap-2 text-neutral-400 py-4"
+          role="status"
+        >
           <Spinner className="w-5 h-5" />
           <span className="text-sm">Loading…</span>
         </div>
@@ -60,10 +60,19 @@ export function ActivityLog() {
       ) : (
         <ul className="divide-y divide-neutral-100 max-h-80 overflow-y-auto">
           {entries.map((entry, i) => (
-            <li key={i} className="flex items-center justify-between py-2.5 text-sm">
+            <li
+              key={i}
+              className="flex items-center justify-between py-2.5 text-sm"
+            >
               <div className="min-w-0">
-                <span className="font-medium text-neutral-800">{LABELS[entry.action] || entry.action}</span>
-                {entry.detail && <span className="text-neutral-400 text-xs ml-2">{entry.detail}</span>}
+                <span className="font-medium text-neutral-800">
+                  {LABELS[entry.action] || entry.action}
+                </span>
+                {entry.detail && (
+                  <span className="text-neutral-400 text-xs ml-2">
+                    {entry.detail}
+                  </span>
+                )}
               </div>
               <span className="text-xs text-neutral-400 shrink-0 ml-3">
                 {new Date(entry.createdAt).toLocaleString()}
