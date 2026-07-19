@@ -1,10 +1,7 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
 
 import { ChangeEvent } from "react";
 import { PetType, ProductFilters, ProductSize } from "../types";
+import { Checkbox, Input } from "./ui";
 
 const CATEGORIES = ["Beds", "Wellness", "Toys", "Furniture", "Accessories"];
 const PET_TYPES: PetType[] = ["Dog", "Cat", "Hamster"];
@@ -60,12 +57,7 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
         <div className="space-y-2">
           {PET_TYPES.map((petType) => (
             <label key={petType} className="flex items-center gap-2.5 text-sm text-neutral-700 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={filters.petType === petType}
-                onChange={() => togglePetType(petType)}
-                className="w-4 h-4 rounded border-neutral-300 text-emerald-600 focus:ring-2 focus:ring-emerald-500"
-              />
+              <Checkbox checked={filters.petType === petType} onChange={() => togglePetType(petType)} />
               {petType}
             </label>
           ))}
@@ -77,12 +69,7 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
         <div className="space-y-2">
           {CATEGORIES.map((category) => (
             <label key={category} className="flex items-center gap-2.5 text-sm text-neutral-700 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={filters.category === category}
-                onChange={() => toggleCategory(category)}
-                className="w-4 h-4 rounded border-neutral-300 text-emerald-600 focus:ring-2 focus:ring-emerald-500"
-              />
+              <Checkbox checked={filters.category === category} onChange={() => toggleCategory(category)} />
               {category}
             </label>
           ))}
@@ -94,12 +81,7 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
         <div className="space-y-2">
           {SIZES.map((size) => (
             <label key={size} className="flex items-center gap-2.5 text-sm text-neutral-700 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={filters.size === size}
-                onChange={() => toggleSize(size)}
-                className="w-4 h-4 rounded border-neutral-300 text-emerald-600 focus:ring-2 focus:ring-emerald-500"
-              />
+              <Checkbox checked={filters.size === size} onChange={() => toggleSize(size)} />
               {size}
             </label>
           ))}
@@ -109,23 +91,9 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
       <fieldset>
         <legend className="text-xs font-semibold text-neutral-700 uppercase tracking-wide mb-2.5">Price</legend>
         <div className="flex items-center gap-2">
-          <input
-            type="number"
-            min={0}
-            placeholder="Min"
-            value={filters.minPrice ?? ""}
-            onChange={handleMinPrice}
-            className="w-full px-3 py-1.5 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-          />
+          <Input type="number" min={0} placeholder="Min" value={filters.minPrice ?? ""} onChange={handleMinPrice} />
           <span className="text-neutral-400">–</span>
-          <input
-            type="number"
-            min={0}
-            placeholder="Max"
-            value={filters.maxPrice ?? ""}
-            onChange={handleMaxPrice}
-            className="w-full px-3 py-1.5 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-          />
+          <Input type="number" min={0} placeholder="Max" value={filters.maxPrice ?? ""} onChange={handleMaxPrice} />
         </div>
       </fieldset>
     </aside>

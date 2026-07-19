@@ -24,10 +24,10 @@ export default function App() {
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl text-white shadow-md">
+            <div className="p-2 bg-emerald-700 rounded-xl text-white">
               <Leaf className="w-5.5 h-5.5" />
             </div>
-            <span className="text-lg font-extrabold font-sans tracking-tight text-neutral-900 leading-tight">
+            <span className="text-lg font-bold font-display tracking-tight text-neutral-900 leading-tight">
               Paws & Pods
             </span>
           </Link>

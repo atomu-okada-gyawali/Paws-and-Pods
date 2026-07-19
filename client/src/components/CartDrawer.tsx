@@ -1,11 +1,9 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+
 
 import { Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { Trash2, Plus, Minus, ShoppingCart, X } from "lucide-react";
+import { IconButton, buttonVariants } from "./ui";
 
 export function CartDrawer() {
   const { cart, isCartOpen, closeCart, updateQuantity, removeItem } = useApp();
@@ -28,13 +26,9 @@ export function CartDrawer() {
             <ShoppingCart className="w-5 h-5 text-emerald-600" />
             Your Cart
           </h2>
-          <button
-            onClick={closeCart}
-            className="p-1.5 text-neutral-400 hover:text-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            aria-label="Close cart"
-          >
+          <IconButton label="Close cart" onClick={closeCart}>
             <X className="w-5 h-5" />
-          </button>
+          </IconButton>
         </div>
 
         <div className="flex-1 overflow-y-auto p-5">
@@ -90,13 +84,13 @@ export function CartDrawer() {
 
                         <div className="flex items-center gap-3">
                           <span className="text-sm font-semibold text-neutral-900">${itemTotal.toFixed(2)}</span>
-                          <button
+                          <IconButton
+                            label={`Remove ${item.product.name} from cart`}
+                            variant="danger"
                             onClick={() => removeItem(item.product.id)}
-                            className="p-1 text-neutral-400 hover:text-rose-600 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-rose-500"
-                            aria-label={`Remove ${item.product.name} from cart`}
                           >
                             <Trash2 className="w-4 h-4" />
-                          </button>
+                          </IconButton>
                         </div>
                       </div>
                     </div>
@@ -113,11 +107,7 @@ export function CartDrawer() {
               <span>Total</span>
               <span>${total.toFixed(2)}</span>
             </div>
-            <Link
-              to="/checkout"
-              onClick={closeCart}
-              className="w-full py-3 bg-neutral-950 hover:bg-neutral-850 text-white rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 flex items-center justify-center gap-2"
-            >
+            <Link to="/checkout" onClick={closeCart} className={buttonVariants({ fullWidth: true })}>
               Checkout
             </Link>
           </div>
